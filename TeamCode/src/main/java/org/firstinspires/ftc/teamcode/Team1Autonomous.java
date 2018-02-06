@@ -184,7 +184,7 @@ public class Team1Autonomous extends LinearOpMode {
             leftRDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             rightRDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            //  sleep(250);   // optional pause after each move
+            //  sleep(250);    optional pause after each move
         }
     }
 }
