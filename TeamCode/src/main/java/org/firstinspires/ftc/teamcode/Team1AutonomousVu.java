@@ -259,7 +259,7 @@ public class Team1AutonomousVu extends LinearOpMode {
                 }
 
 
-                Team1AutonomousModeVu robot = null;
+                Team1AutonomousVu robot = null;
                 while (opModeIsActive() &&
                         (runtime.seconds() < timeoutS) &&
                         (robot.leftDrive.isBusy() && robot.rightDrive.isBusy())) {
