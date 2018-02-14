@@ -37,6 +37,10 @@ public class Team1_teleop extends LinearOpMode {
     private DcMotor elevatorDrive = null;
     public Servo GrabLift = null;
     public Servo GrabMove = null;
+    public Servo Rotation1 = null;
+    public Servo Rotation2 = null;
+    public Servo Rotation3 = null;
+    public Servo Rotation4 = null;
     double servoStartPos = 0;
 
 
@@ -55,7 +59,10 @@ public class Team1_teleop extends LinearOpMode {
         elevatorDrive = hardwareMap.get(DcMotor.class, "elevatorDrive");
         GrabLift = hardwareMap.get(Servo.class, "grabLift");
         GrabMove = hardwareMap.get(Servo.class, "grabMove");
-
+        Rotation1 = hardwareMap.get(Servo.class, "rotation1");
+        Rotation2 = hardwareMap.get(Servo.class, "rotation2");
+        Rotation3 = hardwareMap.get(Servo.class, "rotation3");
+        Rotation4 = hardwareMap.get(Servo.class, "rotation4");
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
@@ -66,6 +73,10 @@ public class Team1_teleop extends LinearOpMode {
         elevatorDrive.setDirection(DcMotor.Direction.FORWARD);
         GrabLift.setDirection(Servo.Direction.FORWARD);
         GrabMove.setDirection(Servo.Direction.REVERSE);
+        Rotation1.setDirection(Servo.Direction.FORWARD);
+        Rotation2.setDirection(Servo.Direction.REVERSE);
+        //Rotation3.setDirection(Servo.Direction.FORWARD);
+        //Rotation4.setDirection(Servo.Direction.REVERSE);
 
 
         // Wait for the game to start (driver presses PLAY)
