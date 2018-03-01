@@ -69,8 +69,8 @@ public class Team1Autonomous extends LinearOpMode {
          */
         leftRDrive = hardwareMap.get(DcMotor.class, "leftRDrive");
         rightRDrive = hardwareMap.get(DcMotor.class, "rightRDrive");
-        leftFDrive = hardwareMap.get(DcMotor.class, "leftFDrive");
-        rightFDrive = hardwareMap.get(DcMotor.class, "rightFDrive");
+        //leftFDrive = hardwareMap.get(DcMotor.class, "leftFDrive");
+        //rightFDrive = hardwareMap.get(DcMotor.class, "rightFDrive");
         elevatorDrive = hardwareMap.get(DcMotor.class, "elevatorDrive");
         GrabLift = hardwareMap.get(Servo.class, "grabLift");
         GrabMove = hardwareMap.get(Servo.class, "grabMove");
@@ -81,18 +81,18 @@ public class Team1Autonomous extends LinearOpMode {
 
         leftRDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightRDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftFDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightFDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //leftFDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //rightFDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         leftRDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightRDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftFDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightFDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //leftFDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //rightFDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Send telemetry message to indicate successful Encoder reset
         telemetry.addData("Path0",  "Starting at %7d :%7d",
-                leftFDrive.getCurrentPosition(),
-                rightFDrive.getCurrentPosition(),
+                //leftFDrive.getCurrentPosition(),
+                //rightFDrive.getCurrentPosition(),
                 leftRDrive.getCurrentPosition(),
                 rightRDrive.getCurrentPosition());
         telemetry.update();
@@ -102,9 +102,10 @@ public class Team1Autonomous extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED,  24,  24, 5.0);  // S1: Forward 24 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED,  12,  12, 7.0);  // S1: Forward 24 Inches with 5 Sec timeout
+        sleep(500);
         //encoderDrive(TURN_SPEED,   12, -12, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
-        encoderDrive(DRIVE_SPEED, -12, -12, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, -5, -5, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
         sleep(1000);     // pause for servos to move
 
@@ -132,25 +133,25 @@ public class Team1Autonomous extends LinearOpMode {
             // Determine new target position, and pass to motor controller
             newLeftTarget = leftRDrive.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
             newRightTarget = rightRDrive.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
-            newLeftTarget = leftFDrive.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
-            newRightTarget = rightFDrive.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
+            //newLeftTarget = leftFDrive.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
+            //newRightTarget = rightFDrive.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
             leftRDrive.setTargetPosition(newLeftTarget);
             rightRDrive.setTargetPosition(newRightTarget);
-            leftFDrive.setTargetPosition(newLeftTarget);
-            rightFDrive.setTargetPosition(newRightTarget);
+            //leftFDrive.setTargetPosition(newLeftTarget);
+           // rightFDrive.setTargetPosition(newRightTarget);
 
             // Turn On RUN_TO_POSITION
             leftRDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             rightRDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            leftFDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            rightFDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            //leftFDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            //rightFDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             // reset the timeout time and start motion.
             runtime.reset();
             leftRDrive.setPower(Math.abs(speed));
             rightRDrive.setPower(Math.abs(speed));
-            leftFDrive.setPower(Math.abs(speed));
-            rightFDrive.setPower(Math.abs(speed));
+            //leftFDrive.setPower(Math.abs(speed));
+            //rightFDrive.setPower(Math.abs(speed));
 
             // keep looping while we are still active, and there is time left, and both motors are running.
             // Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
@@ -167,24 +168,24 @@ public class Team1Autonomous extends LinearOpMode {
                 telemetry.addData("Path2",  "Running at %7d :%7d",
                         leftRDrive.getCurrentPosition(),
                         rightRDrive.getCurrentPosition(),
-                        leftFDrive.getCurrentPosition(),
-                        rightFDrive.getCurrentPosition());
-                telemetry.update();
+                        //leftFDrive.getCurrentPosition(),
+                        //rightFDrive.getCurrentPosition());
+                telemetry.update());
             }
 
             // Stop all motion;
             leftRDrive.setPower(0);
             rightRDrive.setPower(0);
-            leftFDrive.setPower(0);
-            rightFDrive.setPower(0);
+            //leftFDrive.setPower(0);
+            //rightFDrive.setPower(0);
 
             // Turn off RUN_TO_POSITION
-            leftFDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            rightFDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            //leftFDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            //rightFDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             leftRDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             rightRDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            //  sleep(250);    optional pause after each move
+              //sleep(250);   // optional pause after each move
         }
     }
 }

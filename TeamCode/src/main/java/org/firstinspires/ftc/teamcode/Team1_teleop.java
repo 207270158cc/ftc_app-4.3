@@ -10,6 +10,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.navigation.Rotation;
+
 
 /**
  * This file contains an minimal example of a Linear "OpMode". An OpMode is a 'program' that runs in either
@@ -32,15 +34,15 @@ public class Team1_teleop extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor leftRDrive = null;
     private DcMotor rightRDrive = null;
-    private DcMotor leftFDrive = null;
-    private DcMotor rightFDrive = null;
+    //private DcMotor leftFDrive = null;
+    //private DcMotor rightFDrive = null;
     private DcMotor elevatorDrive = null;
     public Servo GrabLift = null;
     public Servo GrabMove = null;
     public Servo Rotation1 = null;
     public Servo Rotation2 = null;
-    public Servo Rotation3 = null;
-    public Servo Rotation4 = null;
+    //public Servo Rotation3 = null;
+    //public Servo Rotation4 = null;
     double servoStartPos = 0;
 
 
@@ -54,22 +56,22 @@ public class Team1_teleop extends LinearOpMode {
         // step (using the FTC Robot Controller app on the phone).
         leftRDrive = hardwareMap.get(DcMotor.class, "leftRDrive");
         rightRDrive = hardwareMap.get(DcMotor.class, "rightRDrive");
-        leftFDrive = hardwareMap.get(DcMotor.class, "leftFDrive");
-        rightFDrive = hardwareMap.get(DcMotor.class, "rightFDrive");
+        //leftFDrive = hardwareMap.get(DcMotor.class, "leftFDrive");
+        //rightFDrive = hardwareMap.get(DcMotor.class, "rightFDrive");
         elevatorDrive = hardwareMap.get(DcMotor.class, "elevatorDrive");
         GrabLift = hardwareMap.get(Servo.class, "grabLift");
         GrabMove = hardwareMap.get(Servo.class, "grabMove");
         Rotation1 = hardwareMap.get(Servo.class, "rotation1");
         Rotation2 = hardwareMap.get(Servo.class, "rotation2");
-        Rotation3 = hardwareMap.get(Servo.class, "rotation3");
-        Rotation4 = hardwareMap.get(Servo.class, "rotation4");
+        //Rotation3 = hardwareMap.get(Servo.class, "rotation3");
+        //Rotation4 = hardwareMap.get(Servo.class, "rotation4");
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
         leftRDrive.setDirection(DcMotor.Direction.FORWARD);
         rightRDrive.setDirection(DcMotor.Direction.FORWARD);
-        leftFDrive.setDirection(DcMotor.Direction.FORWARD);
-        rightFDrive.setDirection(DcMotor.Direction.FORWARD);
+        //leftFDrive.setDirection(DcMotor.Direction.FORWARD);
+        //rightFDrive.setDirection(DcMotor.Direction.FORWARD);
         elevatorDrive.setDirection(DcMotor.Direction.FORWARD);
         GrabLift.setDirection(Servo.Direction.FORWARD);
         GrabMove.setDirection(Servo.Direction.REVERSE);
@@ -83,8 +85,8 @@ public class Team1_teleop extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
-        GrabLift.setPosition(servoStartPos);
-        GrabMove.setPosition(servoStartPos);
+
+
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
@@ -92,15 +94,22 @@ public class Team1_teleop extends LinearOpMode {
             // Setup a variable for each drive wheel to save power level for telemetry
             double leftRPower;
             double rightRPower;
-            double leftFPower;
-            double rightFPower;
+            //double leftFPower;
+            //double rightFPower;
             double elevatorPower;
-            double GrabServoPower;
+            //double GrabServoPower;
+            //double RotationServoPower;
             double maxspeed = 1;
             double nospeed = 0;
             double halfspeed = .5;
             final double CLAW_SPEED = 0.02;
 
+            /*
+            GrabLift.setPosition(servoStartPos);
+            GrabMove.setPosition(servoStartPos);
+            Rotation1.setPosition(servoStartPos);
+            Rotation2.setPosition(servoStartPos);
+                                                */
 
             // Choose to drive using either Tank Mode, or POV Mode
             // Comment out the method that's not used.  The default below is POV.
@@ -114,30 +123,54 @@ public class Team1_teleop extends LinearOpMode {
 
             // Tank Mode uses one stick to control each wheel.
             // - This requires no math, but it is hard to drive forward slowly and keep straight.
-            leftRPower  = -gamepad1.left_stick_y ;
-            rightRPower = -gamepad1.right_stick_y ;
-            leftFPower  = -gamepad1.left_stick_x ;
-            rightFPower = -gamepad1.right_stick_x ;
+            leftRPower = -gamepad1.left_stick_y;
+            rightRPower = -gamepad1.right_stick_y;
+            //leftFPower = -gamepad1.left_stick_x;
+            //rightFPower = -gamepad1.right_stick_x;
             elevatorPower = gamepad2.left_stick_y;
-            GrabServoPower = gamepad2.right_stick_y;
+            //GrabServoPower = gamepad2.right_stick_y;
+            //RotationServoPower = gamepad2.right_trigger;
 
             if (gamepad2.a) {
-                GrabMove.setPosition(GrabMove.getPosition()+CLAW_SPEED);
-                GrabLift.setPosition(GrabLift.getPosition()+CLAW_SPEED);}
+                GrabMove.setPosition(GrabMove.getPosition() + CLAW_SPEED);
+                GrabLift.setPosition(GrabLift.getPosition() - CLAW_SPEED);
+                Rotation1.setPosition(Rotation1.getPosition() - CLAW_SPEED);
+                Rotation2.setPosition(Rotation2.getPosition() + CLAW_SPEED);
+            }
+
             else if (gamepad2.b) {
-                GrabMove.setPosition(GrabMove.getPosition()-CLAW_SPEED);
-                GrabLift.setPosition(GrabLift.getPosition()-CLAW_SPEED);}
+                GrabMove.setPosition(GrabMove.getPosition() - CLAW_SPEED);
+                GrabLift.setPosition(GrabLift.getPosition() + CLAW_SPEED);
+                Rotation1.setPosition(Rotation1.getPosition() + CLAW_SPEED);
+                Rotation2.setPosition(Rotation2.getPosition() - CLAW_SPEED);
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             // Send calculated power to wheels
             leftRDrive.setPower(leftRPower);
             rightRDrive.setPower(rightRPower);
-            leftFDrive.setPower(leftFPower);
-            rightFDrive.setPower(rightFPower);
+            //leftFDrive.setPower(leftFPower);
+            //rightFDrive.setPower(rightFPower);
             elevatorDrive.setPower(elevatorPower);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftFPower, leftRPower, rightFPower, rightRPower);
+            telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftRPower, rightRPower);
             telemetry.update();
         }
     }
