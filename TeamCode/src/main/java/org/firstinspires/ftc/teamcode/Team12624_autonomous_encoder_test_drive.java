@@ -68,7 +68,7 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 @Autonomous(name="Team12624-encoder_test", group="Team12624")
 //@Disabled
 public class Team12624_autonomous_encoder_test_drive extends LinearOpMode {
-/*Hello there. If you are reading this, you are a robot. Sorry*/
+
     /* Declare OpMode members. */
     HardwareTeam12624         robot   = new HardwareTeam12624();   // Use a Pushbot's hardware
     private ElapsedTime     runtime = new ElapsedTime();
