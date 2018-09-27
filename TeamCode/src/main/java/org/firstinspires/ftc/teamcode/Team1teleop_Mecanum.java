@@ -37,69 +37,84 @@ public class Team1teleop_Mecanum extends LinearOpMode {
 
             // Setup a variable for each drive wheel to save power level for telemetry
             speed = Math.hypot(gamepad1.right_stick_x, gamepad1.right_stick_y);
-            direction = Math.atan2(-gamepad1.right_stick_y, gamepad1.right_stick_x) - Math.PI / 4;
+            direction = Math.atan2(-gamepad1.right_stick_y, -gamepad1.right_stick_x) - (Math.PI / 4);
 
             final double v1 = speed * Math.cos(direction) + gamepad1.left_stick_x;
             final double v2 = speed * Math.sin(direction) - gamepad1.left_stick_x;
-            final double v3 = speed * Math.sin(direction) + gamepad1.left_stick_x;
-            final double v4 = speed * Math.cos(direction) - gamepad1.left_stick_x;
+            final double v3 = speed * Math.cos(direction) + gamepad1.left_stick_x;
+            final double v4 = speed * Math.sin(direction) - gamepad1.left_stick_x;
+
 
             final double V1max;
             final double V2max;
             final double V3max;
             final double V4max;
 
-            if (v1>1) {
-                V1max=1;
+            final double vcap = .717;
+
+            V1max = v1/vcap;
+            V2max = v2/vcap;
+            V3max = v3/vcap;
+            V4max = v4/vcap;
+
+            final double V1final;
+            final double V2final;
+            final double V3final;
+            final double V4final;
+
+            if (V1max>1) {
+                V1final=1;
 
             }
-            else if (v1<-1) {
-                V1max = -1;
+            else if (V1max<-1) {
+                V1final = -1;
             }
             else {
-                V1max=v1;
+                V1final=V1max;
             }
 
-            if (v2>1) {
-                V2max=1;
+            if (V2max>1) {
+                V2final=1;
 
             }
-            else if (v2<-1) {
-                V2max = -1;
+            else if (V2max<-1) {
+                V2final = -1;
             }
             else {
-                V2max=v2;
+                V2final=V2max;
             }
 
-            if (v3>1) {
-                V3max=1;
+            if (V3max>1) {
+                V3final=1;
 
             }
-            else if (v3<-1) {
-                V3max = -1;
+            else if (V3max<-1) {
+                V3final = -1;
             }
             else {
-                V3max=v3;
+                V3final=V3max;
             }
-            if (v4>1) {
-                V4max=1;
+            if (V4max>1) {
+                V4final=1;
 
             }
-            else if (v4<-1) {
-                V4max = -1;
+            else if (V4max<-1) {
+                V4final = -1;
             }
             else {
-                V4max=v4;
+                V4final=V4max;
             }
 
-            robot.leftFrontMotor.setPower(V1max);
-            robot.rightFrontMotor.setPower(V2max);
-            robot.leftRearMotor.setPower(V3max);
-            robot.rightRearMotor.setPower(V4max);
+            robot.leftFrontMotor.setPower(V1final);
+            robot.rightFrontMotor.setPower(V2final);
+            robot.leftRearMotor.setPower(V3final);
+            robot.rightRearMotor.setPower(V4final);
 
 
             // Show the elapsed game time and wheel power.
+            telemetry.addData("Function:", "Direction" + direction);
             telemetry.addData("Status", "Run Time: " + runtime.toString());
+            telemetry.addData("Motors", "leftF (%.2f), rightF (%.2f), leftR (%.2f), rightR (%.2f)", V1final, V2final, V3final, V4final);
             telemetry.update();
 
 

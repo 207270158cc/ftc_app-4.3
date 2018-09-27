@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous(name="Autonomous Mecanum", group="Mecanum")
 //@Disabled
-public class Autonomous_Mecanum extends LinearOpMode {
+public class Autonomous_Mecanum_NEO extends LinearOpMode {
 
     /* Declare OpMode members. */
     HardwareTeam12624_Mecanum robot   = new HardwareTeam12624_Mecanum();   // Use a Pushbot's hardware
