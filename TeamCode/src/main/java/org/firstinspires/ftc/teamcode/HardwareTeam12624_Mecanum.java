@@ -3,11 +3,14 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DeviceManager;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.Device;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
+import org.firstinspires.ftc.robotcore.internal.network.DeviceNameManager;
 
 
 public class HardwareTeam12624_Mecanum {
@@ -19,6 +22,8 @@ public class HardwareTeam12624_Mecanum {
     public DcMotor  leftRearMotor = null;
     public DcMotor  rightRearMotor = null;
     public DcMotor  leftArm     = null;
+    public DcMotor  NewMotor1   = null;
+    public DcMotor  NewMotor2   = null;
     public Servo    leftClaw    = null;
     public Servo    rightClaw   = null;
 
@@ -45,18 +50,25 @@ public class HardwareTeam12624_Mecanum {
         leftRearMotor  = hwMap.get(DcMotor.class, "leftrear");
         rightFrontMotor = hwMap.get(DcMotor.class, "rightfront");
         rightRearMotor = hwMap.get(DcMotor.class, "rightrear");
+        NewMotor1 = hwMap.get(DcMotor.class,"leftcenter");
+        NewMotor2 = hwMap.get(DcMotor.class,"rightcenter" );
 
         //leftArm    = hwMap.get(DcMotor.class, "left_arm");
         leftFrontMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         leftRearMotor.setDirection(DcMotor.Direction.FORWARD);
         rightFrontMotor.setDirection(DcMotor.Direction.FORWARD);
         rightRearMotor.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
+        NewMotor1.setDirection(DcMotor.Direction.FORWARD);
+        NewMotor2.setDirection(DcMotor.Direction.REVERSE);
+
 
         // Set all motors to zero power
         leftFrontMotor.setPower(0);
         leftRearMotor.setPower(0);
         rightFrontMotor.setPower(0);
         rightRearMotor.setPower(0);
+        NewMotor1.setPower(0);
+        NewMotor2.setPower(0);
         //leftArm.setPower(0);
 
         // Set all motors to run without encoders.

@@ -2,14 +2,11 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Gamepad;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @TeleOp(name="Team 1 Mecanum Teleop", group="Linear Opmode")
 //@Disabled
-public class Team1teleop_Mecanum extends LinearOpMode {
+public class Team1teleop_Mecanum10639 extends LinearOpMode {
 
 
     // Declare OpMode members.
