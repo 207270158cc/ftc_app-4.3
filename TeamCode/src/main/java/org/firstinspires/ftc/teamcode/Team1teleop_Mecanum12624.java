@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 @TeleOp(name="Team 1 Mecanum Teleop", group="Linear Opmode")
 //@Disabled
-public class Team1teleop_Mecanum extends LinearOpMode {
+public class Team1teleop_Mecanum12624 extends LinearOpMode {
 
 
     // Declare OpMode members.
@@ -35,10 +35,13 @@ public class Team1teleop_Mecanum extends LinearOpMode {
             double direction ;
             double newmotor1power;
             double newmotor2power;
+            double newmotor3power;
 
 
-            newmotor1power = gamepad2.left_stick_y;
-            newmotor2power = -gamepad2.right_stick_y;
+            newmotor1power=0;
+            newmotor2power=0;
+            newmotor3power=0;
+
             // Setup a variable for each drive wheel to save power level for telemetry
             speed = Math.hypot(gamepad1.right_stick_x, gamepad1.right_stick_y);
             direction = Math.atan2(-gamepad1.right_stick_y, -gamepad1.right_stick_x) - (Math.PI / 4);
@@ -109,11 +112,29 @@ public class Team1teleop_Mecanum extends LinearOpMode {
                 V4final=V4max;
             }
 
+            if (gamepad1.a){
+                newmotor1power=.25;
+                newmotor2power=.25;
+            }
+            else if (gamepad1.b) {
+                newmotor1power=.25;
+                newmotor2power=.25;
+            }
+            else if (gamepad1.x) {
+                newmotor1power=0;
+                newmotor2power=0;
+            }
+
+
+
             robot.leftFrontMotor.setPower(V1final);
             robot.rightFrontMotor.setPower(V2final);
             robot.leftRearMotor.setPower(V3final);
             robot.rightRearMotor.setPower(V4final);
 
+            robot.NewMotor1.setPower(newmotor1power);
+            robot.NewMotor2.setPower(newmotor2power);
+            robot.NewMotor3.setPower(newmotor3power);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Function:", "Direction" + direction);

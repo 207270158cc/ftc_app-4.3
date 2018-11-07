@@ -24,6 +24,7 @@ public class HardwareTeam12624_Mecanum {
     public DcMotor  leftArm     = null;
     public DcMotor  NewMotor1   = null;
     public DcMotor  NewMotor2   = null;
+    public DcMotor  NewMotor3   = null;
     public Servo    leftClaw    = null;
     public Servo    rightClaw   = null;
 
@@ -52,6 +53,7 @@ public class HardwareTeam12624_Mecanum {
         rightRearMotor = hwMap.get(DcMotor.class, "rightrear");
         NewMotor1 = hwMap.get(DcMotor.class,"leftcenter");
         NewMotor2 = hwMap.get(DcMotor.class,"rightcenter" );
+        NewMotor3 = hwMap.get(DcMotor.class,"FrontTop" );
 
         //leftArm    = hwMap.get(DcMotor.class, "left_arm");
         leftFrontMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
@@ -60,6 +62,7 @@ public class HardwareTeam12624_Mecanum {
         rightRearMotor.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
         NewMotor1.setDirection(DcMotor.Direction.FORWARD);
         NewMotor2.setDirection(DcMotor.Direction.REVERSE);
+        NewMotor3.setDirection(DcMotor.Direction.FORWARD);
 
 
         // Set all motors to zero power
@@ -69,6 +72,7 @@ public class HardwareTeam12624_Mecanum {
         rightRearMotor.setPower(0);
         NewMotor1.setPower(0);
         NewMotor2.setPower(0);
+        NewMotor3.setPower(0);
         //leftArm.setPower(0);
 
         // Set all motors to run without encoders.
