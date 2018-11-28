@@ -27,7 +27,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Rotation;
  */
 
 @TeleOp(name="Team1_Telop", group="Linear Opmode")
-//@Disabled
+@Disabled
 public class Team1_teleop extends LinearOpMode {
 
     // Declare OpMode members.

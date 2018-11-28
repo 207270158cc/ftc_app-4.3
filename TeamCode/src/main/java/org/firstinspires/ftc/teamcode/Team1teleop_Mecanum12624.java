@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -7,7 +8,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name="Team 1 Mecanum Teleop", group="Linear Opmode")
+@TeleOp(name="Team 1 Mecanum Teleop 12624", group="Linear Opmode")
 //@Disabled
 public class Team1teleop_Mecanum12624 extends LinearOpMode {
 
@@ -35,12 +36,12 @@ public class Team1teleop_Mecanum12624 extends LinearOpMode {
             double direction ;
             double newmotor1power;
             double newmotor2power;
-            double newmotor3power;
+            //double newmotor3power;
 
 
             newmotor1power=0;
             newmotor2power=0;
-            newmotor3power=0;
+            //newmotor3power=0;
 
             // Setup a variable for each drive wheel to save power level for telemetry
             speed = Math.hypot(gamepad1.right_stick_x, gamepad1.right_stick_y);
@@ -134,7 +135,7 @@ public class Team1teleop_Mecanum12624 extends LinearOpMode {
 
             robot.NewMotor1.setPower(newmotor1power);
             robot.NewMotor2.setPower(newmotor2power);
-            robot.NewMotor3.setPower(newmotor3power);
+            //robot.NewMotor3.setPower(newmotor3power);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Function:", "Direction" + direction);
